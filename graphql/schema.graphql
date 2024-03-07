@@ -39,6 +39,7 @@ type DeleteAccountPayload {
 }
 
 type Journal {
+  accountInJournal: Account!
   id: ID!
   journalEntries: [JournalEntry!]
 }

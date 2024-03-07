@@ -1,9 +1,14 @@
 package com.okeicalm.simpleJournalEntry.repository
 
 import com.okeicalm.simpleJournalEntry.entity.Account
+import com.okeicalm.simpleJournalEntry.entity.JournalEntry
+import com.okeicalm.simpleJournalEntry.handler.type.JournalEntryType
 import com.okeicalm.simpleJournalEntry.infra.db.tables.Accounts
 import org.jooq.DSLContext
+import org.jooq.Record
+import org.jooq.Records
 import org.springframework.stereotype.Repository
+import org.yaml.snakeyaml.events.Event.ID
 
 interface AccountRepository {
     fun findAll(): List<Account>
@@ -11,6 +16,11 @@ interface AccountRepository {
     fun create(account: Account): Account
     fun update(account: Account): Account
     fun delete(id: Long): Long
+
+    /**
+     * 新しく追加
+     */
+    fun findByIds(journalEntryList: List<List<JournalEntryType>>): List<Account>
 }
 
 @Repository
@@ -26,6 +36,30 @@ class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountReposit
         return dslContext
             .fetchOne(Accounts.ACCOUNTS, Accounts.ACCOUNTS.ID.eq(id))
             ?.into(Account::class.java)
+    }
+
+    override fun findByIds(journalEntryList: List<List<JournalEntryType>>): List<Account> {
+        println("================ findByIds ====================")
+        println(journalEntryList)
+
+        println("=========== list?? =====================")
+        val ids: List<com.expediagroup.graphql.generator.scalars.ID> = journalEntryList.map { it[0].accountId }
+        println(ids)
+
+        return dslContext.select()
+                .from(Accounts.ACCOUNTS)
+                .where(Accounts.ACCOUNTS.ID.`in`(ids))
+            .fetch { recordToAccount(it) }
+
+    }
+
+    private fun recordToAccount(record: Record?) : Account? {
+        return  if ( record != null) Account(
+            id = record.get(Accounts.ACCOUNTS.ID)!!,
+            code = record.get(Accounts.ACCOUNTS.CODE)!!,
+            elementType = record.get(Accounts.ACCOUNTS.ELEMENT_TYPE)!!,
+            name = record.get(Accounts.ACCOUNTS.NAME)!!,
+        ) else null
     }
 
     override fun create(account: Account): Account {

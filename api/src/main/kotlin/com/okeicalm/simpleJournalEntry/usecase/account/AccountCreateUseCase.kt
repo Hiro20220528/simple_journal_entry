@@ -8,14 +8,15 @@ import org.springframework.transaction.annotation.Transactional
 data class AccountCreateUseCaseInput(val code: String, val name: String, val elementType: Int)
 data class AccountCreateUseCaseOutput(val account: Account)
 
-interface AccountCreateUseCase{
+interface AccountCreateUseCase {
     fun call(input: AccountCreateUseCaseInput): AccountCreateUseCaseOutput
 }
 
 @Service
-class AccountCreateUseCaseImpl(private val accountRepository: AccountRepository): AccountCreateUseCase {
+class AccountCreateUseCaseImpl(private val accountRepository: AccountRepository) : AccountCreateUseCase {
     @Transactional
     override fun call(input: AccountCreateUseCaseInput): AccountCreateUseCaseOutput {
+        println("============ call function =============")
         val account = Account(
             code = input.code,
             name = input.name,
