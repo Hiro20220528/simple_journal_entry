@@ -34,13 +34,15 @@ class JournalRepositoryImpl(private val dslContext: DSLContext) : JournalReposit
                     id = it.getValue(JOURNALS.ID)!!,
                     incurredOn = it.getValue(JOURNALS.INCURRED_ON)!!,
 //                    journalEntries = null,
-                    journalEntries = listOf(JournalEntry(
-                        id = it.getValue( JOURNAL_ENTRIES.ID)!!,
-                        journalId = it.getValue( JOURNAL_ENTRIES.JOURNAL_ID)!!,
-                        side = it.getValue( JOURNAL_ENTRIES.SIDE)!!,
-                        value = it.getValue(JOURNAL_ENTRIES.VALUE)!!,
-                        accountId = it.getValue(JOURNAL_ENTRIES.ACCOUNT_ID)!!,
-                    ))
+                    journalEntries = listOf(
+                        JournalEntry(
+                            id = it.getValue(JOURNAL_ENTRIES.ID)!!,
+                            journalId = it.getValue(JOURNAL_ENTRIES.JOURNAL_ID)!!,
+                            side = it.getValue(JOURNAL_ENTRIES.SIDE)!!,
+                            value = it.getValue(JOURNAL_ENTRIES.VALUE)!!,
+                            accountId = it.getValue(JOURNAL_ENTRIES.ACCOUNT_ID)!!,
+                        )
+                    )
                 )
             }
     }

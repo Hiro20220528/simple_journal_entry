@@ -1,8 +1,6 @@
 package com.okeicalm.simpleJournalEntry.handler.dataloader.journal
 
 import com.expediagroup.graphql.server.execution.KotlinDataLoader
-import com.okeicalm.simpleJournalEntry.entity.Account
-import com.okeicalm.simpleJournalEntry.entity.JournalEntry
 import com.okeicalm.simpleJournalEntry.handler.type.AccountType
 import com.okeicalm.simpleJournalEntry.handler.type.JournalEntryType
 import com.okeicalm.simpleJournalEntry.usecase.account.AccountInJournalUseCase
@@ -47,6 +45,4 @@ class AccountDataLoader(
 //                }
 //            })
 //        }
-
 }
-

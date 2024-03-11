@@ -29,7 +29,6 @@ repositories {
     maven { url = uri("https://repo.spring.io/snapshot") }
 }
 
-
 extra["kotlin-coroutines.version"] = "1.6.0"
 
 val graphqlKotlinVersion = "5.1.0"

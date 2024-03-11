@@ -1,17 +1,15 @@
 package com.okeicalm.simpleJournalEntry.usecase.account
 
 import com.okeicalm.simpleJournalEntry.entity.Account
-import com.okeicalm.simpleJournalEntry.entity.JournalEntry
 import com.okeicalm.simpleJournalEntry.handler.type.JournalEntryType
 import com.okeicalm.simpleJournalEntry.repository.AccountRepository
 import org.springframework.stereotype.Service
 
-
-interface  AccountInJournalUseCase {
+interface AccountInJournalUseCase {
     fun call(input: AccountInJournalUseCaseInput): AccountInJournalUseCaseOutput
 }
 
-data class AccountInJournalUseCaseInput (
+data class AccountInJournalUseCaseInput(
     val ids: List<List<JournalEntryType>>
 )
 
@@ -25,7 +23,7 @@ class AccountInJournalUseCaseImpl(
 ) : AccountInJournalUseCase {
     override fun call(
         input: AccountInJournalUseCaseInput
-    ) :AccountInJournalUseCaseOutput {
+    ): AccountInJournalUseCaseOutput {
         return AccountInJournalUseCaseOutput(repository.findByIds(input.ids))
     }
 }

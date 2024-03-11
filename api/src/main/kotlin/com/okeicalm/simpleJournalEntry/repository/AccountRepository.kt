@@ -1,14 +1,12 @@
 package com.okeicalm.simpleJournalEntry.repository
 
 import com.okeicalm.simpleJournalEntry.entity.Account
-import com.okeicalm.simpleJournalEntry.entity.JournalEntry
 import com.okeicalm.simpleJournalEntry.handler.type.JournalEntryType
+import com.okeicalm.simpleJournalEntry.infra.db.enums.AccountsCategory
 import com.okeicalm.simpleJournalEntry.infra.db.tables.Accounts
 import org.jooq.DSLContext
 import org.jooq.Record
-import org.jooq.Records
 import org.springframework.stereotype.Repository
-import org.yaml.snakeyaml.events.Event.ID
 
 interface AccountRepository {
     fun findAll(): List<Account>
@@ -47,17 +45,16 @@ class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountReposit
         println(ids)
 
         return dslContext.select()
-                .from(Accounts.ACCOUNTS)
-                .where(Accounts.ACCOUNTS.ID.`in`(ids))
+            .from(Accounts.ACCOUNTS)
+            .where(Accounts.ACCOUNTS.ID.`in`(ids))
             .fetch { recordToAccount(it) }
-
     }
 
-    private fun recordToAccount(record: Record?) : Account? {
-        return  if ( record != null) Account(
+    private fun recordToAccount(record: Record?): Account? {
+        return if (record != null) Account(
             id = record.get(Accounts.ACCOUNTS.ID)!!,
             code = record.get(Accounts.ACCOUNTS.CODE)!!,
-            elementType = record.get(Accounts.ACCOUNTS.ELEMENT_TYPE)!!,
+            category = record.get(Accounts.ACCOUNTS.CATEGORY)!!,
             name = record.get(Accounts.ACCOUNTS.NAME)!!,
         ) else null
     }
@@ -68,7 +65,7 @@ class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountReposit
             .apply {
                 name = account.name
                 code = account.code
-                elementType = account.elementType
+                category = AccountsCategory.valueOf(account.category.name)
             }
         record.store()
 
@@ -80,7 +77,7 @@ class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountReposit
             .update(Accounts.ACCOUNTS)
             .set(Accounts.ACCOUNTS.CODE, account.code)
             .set(Accounts.ACCOUNTS.NAME, account.name)
-            .set(Accounts.ACCOUNTS.ELEMENT_TYPE, account.elementType)
+            .set(Accounts.ACCOUNTS.CATEGORY, AccountsCategory.valueOf(account.category.name))
             .where(Accounts.ACCOUNTS.ID.eq(account.id))
             .execute()
         return account
