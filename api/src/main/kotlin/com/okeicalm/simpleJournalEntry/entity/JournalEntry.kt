@@ -8,11 +8,3 @@ data class JournalEntry(
     val accountId: Long,
     val value: Int,
 )
-
-enum class AccountCategory {
-    ASSETS,
-    LIABILITIES,
-    NET_ASSETS,
-    REVENUE,
-    COST
-}

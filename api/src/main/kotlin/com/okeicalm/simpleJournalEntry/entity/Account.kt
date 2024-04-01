@@ -7,3 +7,11 @@ data class Account(
     val name: String,
     val category: AccountCategory
 )
+
+enum class AccountCategory {
+    ASSETS,
+    LIABILITIES,
+    NET_ASSETS,
+    REVENUE,
+    COST
+}
