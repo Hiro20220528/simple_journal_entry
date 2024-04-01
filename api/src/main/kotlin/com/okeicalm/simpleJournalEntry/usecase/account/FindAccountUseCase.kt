@@ -5,25 +5,25 @@ import com.okeicalm.simpleJournalEntry.entity.Account
 import com.okeicalm.simpleJournalEntry.repository.AccountRepository
 import org.springframework.stereotype.Service
 
-interface FindAccountUseCase {
-    fun call(input: FindAccountUseCaseInput): FindAccountUseCaseOutput
+interface FindAccountsUseCase {
+    fun call(input: FindAccountsUseCaseInput): FindAccountsUseCaseOutput
 }
 
-data class FindAccountUseCaseInput(
+data class FindAccountsUseCaseInput(
     val ids: List<ID>
 )
 
-data class FindAccountUseCaseOutput(
-    val findAccount: List<Account>
+data class FindAccountsUseCaseOutput(
+    val account: List<Account>
 )
 
 @Service
-class FindAccountUseCaseImpl(
+class FindAccountsUseCaseImpl(
     private val repository: AccountRepository
-) : FindAccountUseCase {
+) : FindAccountsUseCase {
     override fun call(
-        input: FindAccountUseCaseInput
-    ): FindAccountUseCaseOutput {
-        return FindAccountUseCaseOutput(repository.findByIds(input.ids))
+        input: FindAccountsUseCaseInput
+    ): FindAccountsUseCaseOutput {
+        return FindAccountsUseCaseOutput(repository.findByIds(input.ids))
     }
 }

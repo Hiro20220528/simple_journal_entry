@@ -26,11 +26,11 @@ data class JournalType(
     /**
      * これはschemaと名前が一緒になる
      */
-    fun findAccount(
+    fun account(
         environment: DataFetchingEnvironment
     ): CompletableFuture<AccountType> {
         val ids = this.journalEntries?.get(0)?.accountId
-        return  environment.getValueFromDataLoader(
+        return environment.getValueFromDataLoader(
             "AccountDataLoader",
             ids
         )

@@ -1,8 +1,7 @@
 package com.okeicalm.simpleJournalEntry.usecase.account
 
 import com.okeicalm.simpleJournalEntry.entity.Account
-import com.okeicalm.simpleJournalEntry.handler.type.AccountCategory
-import com.okeicalm.simpleJournalEntry.infra.db.enums.AccountsCategory
+import com.okeicalm.simpleJournalEntry.entity.AccountCategory
 import com.okeicalm.simpleJournalEntry.repository.AccountRepository
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -23,7 +22,6 @@ class AccountCreateUseCaseTests : DescribeSpec({
 
         every { repository.create(account) } returns account.copy(id = 1)
         every { repository.findById(1) } returns account.copy(id = 1)
-
 
         it("returns new account") {
             val output = usecase.call(input)

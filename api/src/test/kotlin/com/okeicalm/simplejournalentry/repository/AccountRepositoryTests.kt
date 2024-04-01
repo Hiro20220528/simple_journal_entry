@@ -1,8 +1,7 @@
 package com.okeicalm.simpleJournalEntry.repository
 
 import com.okeicalm.simpleJournalEntry.entity.Account
-import com.okeicalm.simpleJournalEntry.handler.type.AccountCategory
-import com.okeicalm.simpleJournalEntry.infra.db.enums.AccountsCategory
+import com.okeicalm.simpleJournalEntry.entity.AccountCategory
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 // import org.flywaydb.core.internal.jdbc.JdbcTemplate

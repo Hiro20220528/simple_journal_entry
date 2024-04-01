@@ -1,13 +1,11 @@
 package com.okeicalm.simpleJournalEntry.repository
 
+import com.expediagroup.graphql.generator.scalars.ID
 import com.okeicalm.simpleJournalEntry.entity.Account
-import com.okeicalm.simpleJournalEntry.handler.type.JournalEntryType
 import com.okeicalm.simpleJournalEntry.infra.db.enums.AccountsCategory
 import com.okeicalm.simpleJournalEntry.infra.db.tables.Accounts
 import org.jooq.DSLContext
-import org.jooq.Record
 import org.springframework.stereotype.Repository
-import com.expediagroup.graphql.generator.scalars.ID
 
 interface AccountRepository {
     fun findAll(): List<Account>
