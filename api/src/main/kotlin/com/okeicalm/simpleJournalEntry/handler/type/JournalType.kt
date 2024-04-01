@@ -13,7 +13,7 @@ const val journalTypeGraphQLName = "Journal"
 data class JournalType(
     val id: ID,
 //    val incurredOn: LocalDate,
-    val journalEntries: List<JournalEntryType>?, // <- これをfuncで中で呼び出す
+    val journalEntries: List<JournalEntryType>?,
 ) {
     /**
      * このコンストラクターは引数によってクラスの生成方法を変更できる
@@ -26,11 +26,13 @@ data class JournalType(
     /**
      * これはschemaと名前が一緒になる
      */
-    fun accountInJournal(
+    fun findAccount(
         environment: DataFetchingEnvironment
-    ): CompletableFuture<AccountType> =
-        environment.getValueFromDataLoader(
+    ): CompletableFuture<AccountType> {
+        val ids = this.journalEntries?.get(0)?.accountId
+        return  environment.getValueFromDataLoader(
             "AccountDataLoader",
-            this.journalEntries
+            ids
         )
+    }
 }

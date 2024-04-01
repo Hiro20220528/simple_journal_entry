@@ -1,6 +1,7 @@
 package com.okeicalm.simpleJournalEntry.repository
 
 import com.okeicalm.simpleJournalEntry.entity.Account
+import com.okeicalm.simpleJournalEntry.handler.type.AccountCategory
 import com.okeicalm.simpleJournalEntry.infra.db.enums.AccountsCategory
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -28,7 +29,7 @@ class AccountRepositoryTests(
 //            )
             val result = accountRepository.create(
                 Account(
-                    category = AccountsCategory.ASSETS,
+                    category = AccountCategory.ASSETS,
                     code = "not duplicate with ${Math.random()}",
                     name = "unique code with ${Math.random()}"
                 )

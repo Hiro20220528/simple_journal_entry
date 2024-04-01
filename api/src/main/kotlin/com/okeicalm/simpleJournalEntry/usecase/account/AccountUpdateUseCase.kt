@@ -1,12 +1,12 @@
 package com.okeicalm.simpleJournalEntry.usecase.account
 
 import com.okeicalm.simpleJournalEntry.entity.Account
-import com.okeicalm.simpleJournalEntry.infra.db.enums.AccountsCategory
+import com.okeicalm.simpleJournalEntry.handler.type.AccountCategory
 import com.okeicalm.simpleJournalEntry.repository.AccountRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-data class AccountUpdateUseCaseInput(val id: Long, val code: String, val name: String, val category: AccountsCategory)
+data class AccountUpdateUseCaseInput(val id: Long, val code: String, val name: String, val category: AccountCategory)
 data class AccountUpdateUseCaseOutput(val account: Account)
 
 interface AccountUpdateUseCase {

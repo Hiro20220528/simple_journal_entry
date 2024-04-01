@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component
 @Component
 class JournalQuery(private val repository: JournalRepository) : Query {
     fun allJournals(): List<JournalType> {
-        println("============= allJournals ==================")
         val journals = repository.findAll()
         return journals.map { JournalType(it) }
     }

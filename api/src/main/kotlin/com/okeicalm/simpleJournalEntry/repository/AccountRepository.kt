@@ -7,6 +7,7 @@ import com.okeicalm.simpleJournalEntry.infra.db.tables.Accounts
 import org.jooq.DSLContext
 import org.jooq.Record
 import org.springframework.stereotype.Repository
+import com.expediagroup.graphql.generator.scalars.ID
 
 interface AccountRepository {
     fun findAll(): List<Account>
@@ -18,7 +19,7 @@ interface AccountRepository {
     /**
      * 新しく追加
      */
-    fun findByIds(journalEntryList: List<List<JournalEntryType>>): List<Account>
+    fun findByIds(ids: List<ID>): List<Account>
 }
 
 @Repository
@@ -36,27 +37,12 @@ class AccountRepositoryImpl(private val dslContext: DSLContext) : AccountReposit
             ?.into(Account::class.java)
     }
 
-    override fun findByIds(journalEntryList: List<List<JournalEntryType>>): List<Account> {
-        println("================ findByIds ====================")
-        println(journalEntryList)
-
-        println("=========== list?? =====================")
-        val ids: List<com.expediagroup.graphql.generator.scalars.ID> = journalEntryList.map { it[0].accountId }
-        println(ids)
-
+    override fun findByIds(ids: List<ID>): List<Account> {
         return dslContext.select()
             .from(Accounts.ACCOUNTS)
             .where(Accounts.ACCOUNTS.ID.`in`(ids))
-            .fetch { recordToAccount(it) }
-    }
-
-    private fun recordToAccount(record: Record?): Account? {
-        return if (record != null) Account(
-            id = record.get(Accounts.ACCOUNTS.ID)!!,
-            code = record.get(Accounts.ACCOUNTS.CODE)!!,
-            category = record.get(Accounts.ACCOUNTS.CATEGORY)!!,
-            name = record.get(Accounts.ACCOUNTS.NAME)!!,
-        ) else null
+            .fetch()
+            .into(Account::class.java)
     }
 
     override fun create(account: Account): Account {
