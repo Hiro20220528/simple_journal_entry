@@ -28,8 +28,8 @@ directive @specifiedBy(
   ) on SCALAR
 
 type Account {
+  accountsCategory: AccountCategory!
   code: String!
-  elementType: Int!
   id: ID!
   name: String!
 }
@@ -39,6 +39,7 @@ type DeleteAccountPayload {
 }
 
 type Journal {
+  account: Account!
   id: ID!
   journalEntries: [JournalEntry!]
 }
@@ -63,9 +64,17 @@ type Query {
   allJournals: [Journal!]!
 }
 
+enum AccountCategory {
+  ASSETS
+  COST
+  LIABILITIES
+  NET_ASSETS
+  REVENUE
+}
+
 input CreateAccountInput {
+  category: AccountCategory!
   code: String!
-  elementType: Int!
   name: String!
 }
 
@@ -85,8 +94,8 @@ input DeleteAccountInput {
 }
 
 input UpdateAccountInput {
+  category: AccountCategory!
   code: String!
-  elementType: Int!
   id: ID!
   name: String!
 }

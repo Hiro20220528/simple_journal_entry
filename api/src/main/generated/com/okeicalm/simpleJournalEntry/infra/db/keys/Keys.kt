@@ -3,20 +3,16 @@
  */
 package com.okeicalm.simpleJournalEntry.infra.db.keys
 
-
 import com.okeicalm.simpleJournalEntry.infra.db.tables.Accounts
 import com.okeicalm.simpleJournalEntry.infra.db.tables.JournalEntries
 import com.okeicalm.simpleJournalEntry.infra.db.tables.Journals
 import com.okeicalm.simpleJournalEntry.infra.db.tables.records.AccountsRecord
 import com.okeicalm.simpleJournalEntry.infra.db.tables.records.JournalEntriesRecord
 import com.okeicalm.simpleJournalEntry.infra.db.tables.records.JournalsRecord
-
 import org.jooq.ForeignKey
 import org.jooq.UniqueKey
 import org.jooq.impl.DSL
 import org.jooq.impl.Internal
-
-
 
 // -------------------------------------------------------------------------
 // UNIQUE and PRIMARY KEY definitions

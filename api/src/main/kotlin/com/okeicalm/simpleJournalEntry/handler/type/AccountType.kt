@@ -3,6 +3,7 @@ package com.okeicalm.simpleJournalEntry.handler.type
 import com.expediagroup.graphql.generator.annotations.GraphQLName
 import com.expediagroup.graphql.generator.scalars.ID
 import com.okeicalm.simpleJournalEntry.entity.Account
+import com.okeicalm.simpleJournalEntry.entity.AccountCategory
 
 const val accountTypeGraphQLName = "Account"
 
@@ -11,12 +12,12 @@ data class AccountType(
     val id: ID,
     val code: String,
     val name: String,
-    val elementType: Int,
+    val accountsCategory: AccountCategory
 ) {
     constructor(account: Account) : this(
         ID(account.id.toString()),
         account.code,
         account.name,
-        account.elementType,
+        account.category,
     )
 }

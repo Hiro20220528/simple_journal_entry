@@ -1,5 +1,6 @@
 package com.okeicalm.simpleJournalEntry.entity
 
+// 仕分け
 data class JournalEntry(
     val id: Long = 0,
     val journalId: Long,
